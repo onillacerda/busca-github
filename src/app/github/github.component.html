@@ -1,0 +1,118 @@
+<div class="border container searchPadding">
+<form action="">
+	<div class="form-group">
+		<label>Buscar Nomes de Usuários GitHub</label>
+		<input type="text" class="form-control" placeholder="Buscar no GitHub" [(ngModel)]="userName" name="userName" (keyup) = "findProfile()">
+	</div>
+</form>
+</div>
+<br>
+
+<div class= "topPadding container border" *ngIf = "user">
+
+	  <div class="card">
+	  <h5 class="card-header">{{user.name}} <small>({{user.login}})</small></h5>
+	  <div class="card-body">
+	    <div class="row">
+	    	<div class="col-md-4">
+	    		
+	    		<img src="{{user.avatar_url}}" class="img-thumbnail img-fluid">
+	    	    
+	    	</div>
+	    	<div class="col-md-2"></div>
+	    	<div class="col-md-6">
+	    		
+		    		<span class="badge badge-primary">{{user.followers}} Seguidores</span>
+					<span class="badge badge-secondary">{{user.following}} Segue</span>
+					<span class="badge badge-success">{{user.public_gists}} Resumos Públicos</span>
+					<span class="badge badge-info">{{user.public_repos}} Repositórios Públicos</span>
+					<hr>
+					
+				
+	    		<div class="card">
+	    		 <ul class="list-group list-group-flush">
+				    <li class="list-group-item" *ngIf="user.name">Nome: {{user.name}}</li>
+				    <li class="list-group-item" *ngIf="user.location">Localização: {{user.location}}</li>
+				    <li class="list-group-item" *ngIf="user.blog">Blog: {{user.blog}}</li>
+				    <li class="list-group-item" *ngIf="user.company">Companhia: {{user.company}}</li>
+				 </ul>
+				</div>
+
+				<hr>
+	    		
+	    	    <a href="{{user.html_url}}" class="btn btn-outline-success btn-block" target="_blank"> Perfil GitHub</a>
+	    		
+	    	</div>
+	    </div>
+	  </div>
+	</div>
+
+	<hr>
+
+	<button (click)="repositorio=!repositorio" class="btn btn-sm btn-outline-primary mr-2">REPOS - Lista dos Repositórios do Usuário</button>
+	<button (click)="acessados=!acessados" class="btn btn-sm btn-outline-primary mr-2">STARRED - Lista dos Repositórios Mais Visitados</button>
+	<hr/>
+
+	<div class="ruleOptionsPanel" *ngIf=" repositorio">
+		<div class="card">
+		<h5 class="card-header">REPOS - Lista dos Repositórios do Usuário</h5>
+		<div class="card-body col-md-12" >
+			
+				
+				<div class="card">
+				  <ul class="list-group list-group-flush" *ngFor="let repo of repos">
+				    <li class="list-group-item">
+				    	<div class="row">
+				    		<div class="col-md-9">
+								<a href="{{repo.html_url}}" target="_blank">{{repo.name}}</a>
+
+								<p>{{repo.description}}</p>
+							</div>
+							<div class="col-md-3">
+								
+								<a href="{{repo.html_url}}" target="_blank" class="btn btn-outline-info" style="width: 7.5rem">Visualizar</a>
+							</div>
+
+				    		
+				    	</div>
+				    	
+				    </li>
+				  </ul>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="ruleOptionsPanel" *ngIf="acessados">
+		<div class="card">
+		<h5 class="card-header">STARRED - Lista dos Repositórios Mais Visitados</h5>
+		<div class="card-body col-md-12" >
+			
+				
+				<div class="card">
+				  <ul class="list-group list-group-flush" *ngFor="let star of starred">
+				    <li class="list-group-item">
+				    	<div class="row">
+				    		<div class="col-md-9">
+								<a href="{{star.html_url}}" target="_blank">{{star.name}}</a>
+
+								<p>{{star.description}}</p>
+							</div>
+							<div class="col-md-3">
+								<a href="{{star.html_url}}" target="_blank" class="btn btn-outline-info" style="width: 7.5rem">Visualizar</a>
+							</div>
+
+				    		
+				    	</div>
+				    	
+				    </li>
+				  </ul>
+				</div>
+			</div>
+		</div>
+	</div>
+	  
+
+
+	
+</div>
